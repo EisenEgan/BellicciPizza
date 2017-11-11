@@ -1,0 +1,66 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+html {
+  box-sizing: border-box;
+  font-size: 62.5%;
+}
+
+body {
+  font-weight: 400;
+  line-height: 1.6;
+  color: #fff;
+  min-height: 100vh;
+  font-family: 'Aldrich', sans-serif;
+  position: relative;
+  background-image: linear-gradient(
+    to right top, #364667, #3e1b3c);
+}
+
+#map {
+  text-align: center;
+  margin: 4rem 8rem;
+}
+
+agm-map {
+  height: 40rem;
+}
+
+.location-detail {
+  text-decoration: none;
+  color: #333;
+}
+
+.row {
+  max-width: 120rem;
+  margin: 0 auto;
+}
+
+.col-1-of-2 {
+  float: left;
+  width: calc((100% - 10rem) / 2);
+  text-align: center;
+}
+
+.col-1-of-2:not(:last-child) {
+  margin-right: 10rem;
+}
+
+.menu-link {
+  color: #fff;
+}
+
+.address {
+  font-size: 2.5rem;
+  display: inline-block;
+  text-align: left;
+  margin: 0 auto;
+}

@@ -1,0 +1,80 @@
+body {
+  text-shadow: 1px 1px #3a2046, -1px -1px #3a2046, 1px -1px #3a2046, -1px -1px #3a2046;
+}
+
+#about {
+  float: left;
+  height: 50vh;
+  width: 100vw;
+  clip-path: polygon(1% 3%, 97% 3%, 1% 97%);
+  -webkit-shape-outside: polygon(0% 0%, 100% 0%, 100% 4%, 4% 100%);
+  overflow: hidden;
+}
+
+.page-link {
+  text-decoration: none;
+}
+
+.about__heading {
+  /*position: absolute;
+  left: 10%;
+  top: 12%;*/
+  padding: 10rem;
+  color: #fff;
+  text-shadow: 1px 1px #3a2046, -1px -1px #3a2046, 1px -1px #3a2046, -1px -1px #3a2046;
+  font-size: 6rem;
+}
+
+.about__child {
+  width: 100%;
+  height: 100%;
+  background-image: linear-gradient( rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('/img/old-oven-2.png');
+  background-size: cover;
+  background-position: center;
+  transition: all .5s;
+  animation-name: moveInLeft;
+  animation-duration: .5s;
+  animation-timing-function: ease-out;
+}
+
+#history {
+  height: 100vh;
+  padding-top: 6rem;
+  padding-right: 2rem;
+  font-size: 2rem;
+  background-image: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/img/VintagePizzaria.jpg');
+  background-size: cover;
+  background-position: center;
+  clip-path: polygon(99% 97%, 3% 50%, 99% 3%);
+  animation-name: moveInRight;
+  animation-duration: .5s;
+  animation-timing-function: ease-out;
+}
+
+#philosophy {
+  float: left;
+  height: 50vh;
+  width: 100vw;
+  clip-path: polygon(1% 3%, 97% 97%, 1% 97%);
+  -webkit-shape-outside: polygon(4% 0%, 100% 96%, 100% 100%, 0% 100%);
+  overflow: hidden;
+}
+
+.philosophy__child {
+  width: 100%;
+  height: 100%;
+  background-image: linear-gradient( rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('/img/AnotherPizza.jpg');
+  background-size: cover;
+  background-position: center;
+  transition: all .5s;
+  animation-name: moveInLeft;
+  animation-duration: .5s;
+  animation-timing-function: ease-out;
+}
+
+.philosophy__heading {
+  padding: 10rem;
+  color: #fff;
+  text-shadow: 1px 1px #3a2046, -1px -1px #3a2046, 1px -1px #3a2046, -1px -1px #3a2046;
+  font-size: 6rem;
+}
