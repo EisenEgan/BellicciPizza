@@ -1,0 +1,51 @@
+<div class="order">
+  <div class="order-summary">
+    <h1>Order Summary:</h1>
+    <div class="itemAndPrice">
+      <div class="item">
+        <h3>Item</h3>
+      </div>
+      <div class="quantity">
+        <h3>Qty.</h3>
+      </div>
+      <div class="price">
+        <h3>Price</h3>
+      </div>
+    </div>
+    <div *ngFor="let item of items">
+      <div class="itemAndPrice">
+        <div class="item">
+          {{ item.name }}<br />
+          {{ item.size ? "(" + item.size + ")" : "" }}
+        </div>
+        <div class="quantity">
+          {{ item.qty }}
+        </div>
+        <div class="price">
+          {{ item.qty * item.price | currency:'USD':true }}
+        </div>
+      </div>
+      <div class="remove">
+        <div class="remove-button" (click)="removeItem(item)">
+          Remove Item
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="total-summary">
+    <div class="total">
+      <div class="total-amount">
+        <h3>Total</h3>
+      </div>
+    </div>
+    <div class="total">
+      <div class="total-amount">
+        {{ getTotal() | currency:'USD':true }}
+        <!-- {{ items.reduce((acc, val) => acc +  1, 0) }} -->
+      </div>
+    </div>
+    <div class="place-order">
+      <button class="btn" (click)="placeOrder()">Place Order</button>
+    </div>
+  </div>
+</div>

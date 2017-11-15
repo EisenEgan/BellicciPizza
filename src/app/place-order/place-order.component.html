@@ -1,0 +1,52 @@
+<h1 class="order-heading">Order Summary:</h1>
+<div class="place-order-wrapper">
+  <div class="order-wrapper">
+    <div class="order">
+      <div class="order-summary">
+        <div class="name">
+          <h3>Name</h3>
+        </div>
+        <div class="quantity">
+          <h3>Quantity</h3>
+        </div>
+        <div class="price">
+          <h3>Subtotal</h3>
+        </div>
+      </div>
+      <div *ngFor="let item of items">
+        <div class="order-summary">
+          <div class="name">
+            {{ item.name }} {{ item.size ? "- (" + item.size + ")" : "" }}
+          </div>
+          <div class="quantity">
+            <span class="change-qty" (click)="decQty(item)">-</span> {{ item.qty }} <span class="change-qty" (click)="incQty(item)">+</span>
+          </div>
+          <div class="price">
+            {{ item.price * item.qty | currency:'USD':true }}
+          </div>
+        </div>
+      </div>
+      <div class="go-back">
+        <div class="go-back-option" (click)="goBack()">
+          Go Back To Menu
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="order-form">
+    <app-order-form></app-order-form>
+  </div>
+</div>
+<div class="order-bar">
+  <div class="item-total">
+    Total Items:<br />
+    {{ getItemCount() }}
+  </div>
+  <div class="submit-order">
+    <button class="btn" (click)="placeOrder()">Place Order</button>
+  </div>
+  <div class="price-total">
+    Total Price:<br />
+    {{ getTotalPrice() | currency:'USD':true }}
+  </div>
+</div>

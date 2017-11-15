@@ -1,10 +1,12 @@
 const express = require('express');
+const cors = require('cors')
 const bodyParser = require('body-parser');
 const path = require('path');
 const http = require('http');
 const mongoose = require('mongoose');
 
 const app = express();
+app.use(cors())
 
 var config = require('./config');
 mongoose.connect(config.database);

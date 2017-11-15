@@ -1,0 +1,12 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+}
+
+h3 {
+  background-color: yellowgreen;
+}
+
+.user-nav {
+  background-color: green;
+}

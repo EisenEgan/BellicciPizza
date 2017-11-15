@@ -1,0 +1,58 @@
+<header class="header">
+  <div class="location__heading">
+    <h1>Bellicci Pizza - {{ location?.city }}</h1>
+  </div>
+  <div class="location__info">
+    <div class="location__address-wrapper">
+      <div class="location__address">
+        <h3>Address:</h3>
+        Bellicci Pizza - {{ location?.city }}<br />
+        {{ location?.street }}<br />
+        {{ location?.city }}, {{ location?.state }} {{ location?.zip }}
+      </div>
+    </div>
+    <div class="location__hours-wrapper">
+      <div class="location__hours">
+        <h3>Hours:</h3>
+        <div *ngFor="let time of location?.hours">
+          <div *ngIf="!time?.closed">
+            {{ time.days }} : {{ time.opening }} A.M. - {{ time.closing }} P.M.
+          </div>
+          <div *ngIf="time?.closed">
+            {{ time.days }} : Closed
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="masonry">
+  <div *ngFor="let item of sortedItems" class="brick">
+    <div class="category">
+      <div class="category-heading">
+        <h1>{{item.categoryName}}</h1>
+      </div>
+    </div>
+    <hr />
+
+    <div *ngFor="let product of item.items">
+      <div class="item" (click)=addItemToOrder(product)>
+        <div class="details">
+          {{ product.name }} {{ product.size? "- " + product.size + " -": "" }} {{ product.price | currency:'USD':true }}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="order" (click)="toggleOrder()">
+  <svg class="option-icon order-icon">
+    <use xlink:href="img/sprite.svg#note"></use>
+  </svg>
+  <div *ngIf="orderQty">
+    <span class="item-count">{{ orderQty }}</span>
+  </div>
+</div>
+
+<app-order-summary [@slideInOut]="menuState"></app-order-summary>

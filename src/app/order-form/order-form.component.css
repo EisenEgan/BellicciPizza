@@ -1,0 +1,82 @@
+/* TABS */
+
+.order-form {
+  margin: 2rem;
+  background-color: rgba(0, 0, 0, .5);
+  border-radius: 10px;
+}
+
+.order-form-tabs {
+  border-top-right-radius: 8px;
+  border-top-left-radius: 8px;
+  display: flex;
+  border: 2px solid rgba(0, 0, 0, .4);
+  text-align: center;
+  font-size: 2rem;
+}
+
+.tab {
+  width: 50%;
+  padding: 1rem;
+  cursor: pointer;
+}
+
+.delivery-tab {
+  border-top-left-radius: 8px;
+}
+
+.pickup-tab {
+  border-top-right-radius: 8px;
+}
+
+.active {
+  background-color: #3A3253;
+}
+
+/* FORM */
+
+.form {
+  padding-bottom: 1.5rem;
+}
+
+.order-label {
+  display: block;
+  font-size: 1.4rem;
+  margin: .5rem 0;
+}
+
+.order-element {
+  padding: 1rem 2rem;
+}
+
+.order-control {
+  width: 100%;
+  background-color: rgba(0, 0, 0, .4);
+  color: inherit;
+  border: none;
+  border-radius: 4px;
+  padding: .8rem 2rem;
+  font-size: 1.2rem;
+}
+
+.name {
+  display: flex;
+}
+
+.name .order-element {
+  width: 50%;
+}
+
+.city-info {
+  display: flex;
+}
+
+.city-info .order-element {
+  width: 50%;
+}
+
+.alert {
+  font-size: 1.2rem;
+  padding: .5rem;
+  color: #c92a2a;
+}

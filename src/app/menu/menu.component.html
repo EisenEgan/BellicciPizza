@@ -1,0 +1,127 @@
+<div class="masonry">
+  <div *ngFor="let item of items" class="brick">
+    <div class="category">
+      <div class="category-heading">
+        <h1>{{item.categoryName}}</h1>
+      </div>
+      <div class="category-options">
+        <svg class="option-icon db-icon" (click)="editCategory(item.categoryName)">
+          <use xlink:href="img/sprite.svg#technology"></use>
+        </svg>
+        <svg class="option-icon delete-icon" (click)="setSelectedCategory(item.categoryName)">
+          <use xlink:href="img/sprite.svg#can"></use>
+        </svg>
+      </div>
+    </div>
+    <div class="edit-category-panel" *ngIf="editCat == item.categoryName">
+      <form #form="ngForm" novalidate (submit)="editCategorySubmit(form)">
+        <div *ngIf="name.invalid && editCatSubmitted" class="alert">
+          <div *ngIf="name.errors.required">
+            Name is required.
+          </div>
+          <div *ngIf="name.errors.minlength">
+            Name must be at least 4 characters long.
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="edit-label">Name</label>
+          <input type="text" class="form-control" [(ngModel)]="newCatName" name="name" #name="ngModel" required minlength="4">
+        </div>
+        <input type="submit" class="btn btn-item" value="Edit Item">
+      </form>
+    </div>
+    <hr />
+
+    <div *ngFor="let product of item.items">
+      <div class="item">
+        <div class="details">
+          {{ product.name }} {{ product.size? "- " + product.size + " -": "" }} {{ product.price }}
+        </div>
+        <div class="item-options">
+          <svg class="option-icon db-icon" (click)="edit(product)">
+            <use xlink:href="img/sprite.svg#technology"></use>
+          </svg>
+          <svg class="option-icon delete-icon" (click)="setSelected(product)">
+            <use xlink:href="img/sprite.svg#can"></use>
+          </svg>
+        </div>
+      </div>
+      <div class="edit-panel" *ngIf="editProduct && editProduct?._id == product._id">
+        <form #form="ngForm" novalidate (submit)="editItem(form)">
+          <div *ngIf="name.invalid && editSubmitted" class="alert">
+            <div *ngIf="name.errors.required">
+              Name is required.
+            </div>
+            <div *ngIf="name.errors.minlength">
+              Name must be at least 4 characters long.
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="edit-label">Name</label>
+            <input type="text" class="form-control" [(ngModel)]="editProduct.name" name="name" #name="ngModel" required minlength="4">
+          </div>
+          <div *ngIf="price.invalid && editSubmitted" class="alert">
+            <div *ngIf="price.errors.required">
+              Price is required.
+            </div>
+            <div *ngIf="price.errors.pattern">
+              Price must be properly formatted
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="edit-label">Price</label>
+            <input type="text" class="form-control" [(ngModel)]="editProduct.price" name="price" #price="ngModel" required pattern="^\d+(\.\d{1,2})?$">
+          </div>
+          <div *ngIf="calories.invalid && editSubmitted" class="alert">
+            <div *ngIf="calories.errors.required">
+              Calories is required.
+            </div>
+            <div *ngIf="calories.errors.pattern">
+              Calories must be a number
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="edit-label">Calories</label>
+            <input type="text" class="form-control" [(ngModel)]="editProduct.calories" name="calories" #calories="ngModel" required minlength="4" pattern="^\d+$">
+          </div>
+          <div class="form-group">
+            <label class="edit-label">Size</label>
+            <input type="text" class="form-control" [(ngModel)]="editProduct.size" name="size" required minlength="4">
+          </div>
+          <div class="form-group">
+            <label class="edit-label">Category</label>
+            <select class="form-control" [(ngModel)]="editProduct.category.name" name="category" #category="ngModel" required>
+              <option *ngFor="let category of categories" [value]="category.name">{{category.name}}</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="edit-label">Location</label>
+            <select class="form-control" [(ngModel)]="editProduct.location" name="location"  #location="ngModel" required>
+              <option *ngFor="let location of locations" [value]="location">{{location}}</option>
+            </select>
+          </div>
+          <input type="submit" class="btn btn-item" value="Edit Item">
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-dialog [(visible)]="showDialog">
+  <div class="dialog-contents">
+    <h1>Are you sure you want to delete this item?</h1>
+    <div class="btns">
+      <button (click)="deleteItem()" class="btn">Yes</button>
+      <button (click)="showDialog = !showDialog" class="btn">No</button>
+    </div>
+  </div>
+</app-dialog>
+<app-dialog [(visible)]="showCategoryDialog">
+  <div class="dialog-contents">
+    <h1>Are you sure you want to delete this category?</h1>
+    <div class="btns">
+      <button (click)="deleteCategory()" class="btn">Yes</button>
+      <button (click)="showCategoryDialog = !showCategoryDialog" class="btn">No</button>
+    </div>
+  </div>
+</app-dialog>
