@@ -23,7 +23,8 @@ const ItemSchema = mongoose.Schema({
     type: Number,
     required: true
   },
-  location: String
+  location: String,
+  toppings: [this]
 });
 
 module.exports = mongoose.model('Item', ItemSchema);

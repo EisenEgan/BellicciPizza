@@ -63,7 +63,6 @@ module.exports.addLocation = function(req, res) {
 }
 
 module.exports.getLocation = function(req, res) {
-  console.log('herp')
   var city = req.params.location
   // var city = req.params.location.replace(/-/, " ").toLowerCase()
   // city = city.indexOf('st') != -1 ? city.replace(/st/, 'st.') : city
@@ -72,31 +71,51 @@ module.exports.getLocation = function(req, res) {
   Location.find({"slug": city}).exec((err, location) => {
     var categoryNameHolder = []
     var categoryArr = []
+    var pizzaSizes = []
+    var specialPizzas = []
+    var toppings = []
 
     location[0].items.forEach(function(item) {
-      categoryNameHolder[item.category.name] = categoryNameHolder[item.category.name] || {}
-      var obj = categoryNameHolder[item.category.name]
-      if (Object.keys(obj).length == 0)
-        categoryArr.push(obj)
-      obj.categoryName = item.category.name
-      obj.items = obj.items || []
-      obj.items.push(item)
+      if (item.name == "Custom Pizza") {
+        pizzaSizes.push(item)
+      }
+      else if (item.category.name == "Pizza") {
+        specialPizzas.push(item)
+      }
+      else if (item.category.name == "Topping") {
+        toppings.push(item)
+      } else {
+        categoryNameHolder[item.category.name] = categoryNameHolder[item.category.name] || {}
+        var obj = categoryNameHolder[item.category.name]
+        if (Object.keys(obj).length == 0)
+          categoryArr.push(obj)
+        obj.categoryName = item.category.name
+        obj.items = obj.items || []
+        obj.items.push(item)
+      }
     })
 
+    var pizza = {
+      categoryName: "Pizza",
+      pizzaSizes: pizzaSizes,
+      specialPizzas: specialPizzas,
+      toppings: toppings
+    }
     // var locationAndSortedItems = {
     //   location: location[0],
     //   sortedItems: groupedItems
     // }
 
-    var locationAndSortedItems = {
+    var locationSortedItemsAndPizza = {
       location: location[0],
-      sortedItems: categoryArr
+      sortedItems: categoryArr,
+      pizza: pizza
     }
 
     if (err) {
       res.status(400).json(err)
     } else {
-      res.status(200).json(locationAndSortedItems)
+      res.status(200).json(locationSortedItemsAndPizza)
     }
   })
 }

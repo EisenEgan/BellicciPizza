@@ -17,9 +17,12 @@
         <div class="item">
           {{ item.name }}<br />
           {{ item.size ? "(" + item.size + ")" : "" }}
+          <div *ngFor="let topping of item.toppings" class="toppings">
+            {{ topping.name }}
+          </div>
         </div>
         <div class="quantity">
-          {{ item.qty }}
+          x{{ item.qty }}
         </div>
         <div class="price">
           {{ item.qty * item.price | currency:'USD':true }}

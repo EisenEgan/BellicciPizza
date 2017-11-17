@@ -31,6 +31,10 @@
   width: 50%;
 }
 
+.toppings {
+  font-size: .8rem;
+}
+
 .quantity {
   width: 25%;
 }

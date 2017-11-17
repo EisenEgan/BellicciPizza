@@ -17,9 +17,12 @@
         <div class="order-summary">
           <div class="name">
             {{ item.name }} {{ item.size ? "- (" + item.size + ")" : "" }}
+            <div *ngFor="let topping of item.toppings" class="toppings">
+              {{ topping.name }}
+            </div>
           </div>
           <div class="quantity">
-            <span class="change-qty" (click)="decQty(item)">-</span> {{ item.qty }} <span class="change-qty" (click)="incQty(item)">+</span>
+            <span class="change-qty" (click)="decQty(item)">-</span>{{ item.qty }} <span class="change-qty" (click)="incQty(item)">+</span>
           </div>
           <div class="price">
             {{ item.price * item.qty | currency:'USD':true }}

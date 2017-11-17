@@ -27,7 +27,30 @@
   </div>
 </header>
 
+
 <div class="masonry">
+
+  <div class="brick">
+    <div class="category">
+      <div class="category-heading">
+        <h1>{{pizza?.categoryName}}</h1>
+      </div>
+    </div>
+    <hr />
+
+    <div class="create-pizza">
+      <button class="btn-user-menu" (click)="createPizza()">Create A Pizza</button>
+    </div>
+
+    <div *ngFor="let product of pizza?.specialPizzas">
+      <div class="item" (click)=addItemToOrder(product)>
+        <div class="details">
+          {{ product.name }} {{ product.size? "- " + product.size + " -": "" }} {{ product.price | currency:'USD':true }}
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div *ngFor="let item of sortedItems" class="brick">
     <div class="category">
       <div class="category-heading">
@@ -54,5 +77,39 @@
     <span class="item-count">{{ orderQty }}</span>
   </div>
 </div>
+
+<app-dialog [(visible)]="showDialog">
+  <div class="dialog-contents">
+    <h1>Create a Pizza</h1>
+    <div class="dialog__sizeAndTopping">
+      <form [formGroup]="customPizzaForm" novalidate>
+        <div class="dialog__size">
+          <select class="form-control" formControlName="pizzaSize">
+          <!-- <select class="form-control" [(ngModel)]="customPizza.pizzaSize"> -->
+            <option *ngFor="let item of pizza?.pizzaSizes" [ngValue]="item">{{item.size}} - {{item.price | currency:'USD':true}}</option>
+          </select>
+        </div>
+        <!-- <div class="dialog__topping">
+          <select class="form-control" [(ngModel)]="customPizza.topping" required>
+            <option *ngFor="let topping of toppings?.items" [value]="topping">{{topping.name}}</option>
+          </select>
+        </div> -->
+        <div formArrayName="toppings" *ngFor="let topping of customPizzaForm.get('toppings').controls; let i = index;">
+          <div [formGroupName]="i">
+            <select class="form-control" formControlName="topping">
+              <option *ngFor="let topping of toppings" [ngValue]="topping">{{topping.name}} - {{ toppingPrice(topping) | currency:'USD':true }}</option>
+            </select>
+            <span (click)="removeTopping(i)">X</span>
+          </div>
+        </div>
+        <a class="add-topping" (click)="addTopping()">Add another topping</a>
+      </form>
+    </div>
+    <div class="btns">
+      <button (click)="addPizzaToOrder()" class="btn">Add Item</button>
+      <button (click)="showDialog = !showDialog" class="btn">Cancel</button>
+    </div>
+  </div>
+</app-dialog>
 
 <app-order-summary [@slideInOut]="menuState"></app-order-summary>

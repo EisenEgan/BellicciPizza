@@ -2,14 +2,14 @@
   <agm-map [latitude]="lat" [longitude]="lng" [zoom]="11">
     <agm-marker [latitude]="coords[0][0]" [longitude]="coords[0][1]">
       <agm-info-window>
-        <a href="#" class="location-detail">
+        <a [routerLink]="['/menu/st-paul']" class="location-detail">
           Bellicci Pizza - St. Paul
         </a>
       </agm-info-window>
     </agm-marker>
     <agm-marker [latitude]="coords[1][0]" [longitude]="coords[1][1]">
       <agm-info-window>
-        <a href="#" class="location-detail">
+        <a [routerLink]="['/menu/minneapolis']" class="location-detail">
           Bellicci Pizza - Minneapolis
         </a>
       </agm-info-window>
@@ -19,7 +19,7 @@
 <section id="addresses">
   <div class="row">
     <div class="col-1-of-2">
-      <a href="#" class="menu-link">
+      <a [routerLink]="['/menu/st-paul']" class="menu-link">
         <div class="address">
           Bellicci Pizza - St. Paul<br />
           945 Rice St,<br />
@@ -28,7 +28,7 @@
       </a>
     </div>
     <div class="col-1-of-2">
-      <a href="#" class="menu-link">
+      <a [routerLink]="['/menu/minneapolis']" class="menu-link">
         <div class="address">
           Bellicci Pizza - Minneapolis<br />
           81 S. 9th St,<br />

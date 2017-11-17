@@ -25,8 +25,48 @@ export class OrderSummaryComponent implements OnInit {
         var ordered = false;
         for (let orderItem of this.items) {
           if (orderItem._id == item._id) {
-            orderItem.qty++
-            ordered = true
+            if (orderItem.name == 'Custom Pizza') {
+              if (orderItem.toppings.length == item.toppings.length) {
+                var toppingsDontMatch = false
+                orderItem.toppings.sort(function(a, b) {
+                  var nameA = a.name.toUpperCase(); // ignore upper and lowercase
+                  var nameB = b.name.toUpperCase(); // ignore upper and lowercase
+                  if (nameA < nameB) {
+                    return -1;
+                  }
+                  if (nameA > nameB) {
+                    return 1;
+                  }
+                  return 0;
+                })
+                item.toppings.sort(function(a, b) {
+                  var nameA = a.name.toUpperCase(); // ignore upper and lowercase
+                  var nameB = b.name.toUpperCase(); // ignore upper and lowercase
+                  if (nameA < nameB) {
+                    return -1;
+                  }
+                  if (nameA > nameB) {
+                    return 1;
+                  }
+                  return 0;
+                })
+                for (var i = 0; i < orderItem.toppings.length; i++) {
+                  if (item.toppings[i]._id == orderItem.toppings[i]._id) {
+                    continue
+                  } else {
+                    console.log('print unequal')
+                    toppingsDontMatch = true
+                  }
+                }
+                if (!toppingsDontMatch) {
+                  orderItem.qty++
+                  ordered = true
+                }
+              }
+            } else {
+              orderItem.qty++
+              ordered = true
+            }
           }
         }
         if (!ordered) {
@@ -48,11 +88,21 @@ export class OrderSummaryComponent implements OnInit {
 
   removeItem(item: any) {
     this.items = this.items.filter((orderItem) => {
-      if (orderItem._id != item._id)
-        return orderItem
-      else
-        // this.orderService.orderCount - orderItem.qty
-        this.orderCount = this.orderCount - orderItem.qty
+      if (item.name == "Custom Pizza" && orderItem._id == item._id) {
+        if (item.toppings.length == orderItem.toppings.length) {
+          for (var i = 0; i < item.toppings.length; i++) {
+            if (item.toppings[i] != orderItem.toppings[i])
+              return orderItem;
+          }
+        } else {
+          return orderItem
+        }
+      } else {
+        if (orderItem._id != item._id)
+          return orderItem
+        else
+          this.orderCount = this.orderCount - orderItem.qty
+      }
     })
     this.orderService.removeItem(this.orderCount)
   }

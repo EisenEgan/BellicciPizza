@@ -5,6 +5,7 @@ var ctrlUsers = require('../controllers/users.controllers')
 var ctrlCategories = require('../controllers/categories.controllers')
 var ctrlLocations = require('../controllers/locations.controllers')
 var ctrlItems = require('../controllers/items.controllers')
+var ctrlOrders = require('../controllers/orders.controllers')
 var ctrlAdmin = require('../controllers/admin.controllers')
 
 router.post('/login', ctrlUsers.login)
@@ -34,6 +35,11 @@ router
   .post(/*ctrlUsers.authenticate,*/ ctrlCategories.addCategory)
   .put(/*ctrlUsers.authenticate,*/ ctrlCategories.editCategory)
   .delete(/*ctrlUsers.authenticate,*/ ctrlCategories.deleteCategory)
+
+router
+  .route('/order')
+  .get(ctrlOrders.getOrders)
+  .post(ctrlOrders.addOrder)
 
 
 
